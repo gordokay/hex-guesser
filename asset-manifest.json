@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hex-guesser/static/css/main.7edbdc23.css",
+    "main.js": "/hex-guesser/static/js/main.e6a68ac9.js",
+    "index.html": "/hex-guesser/index.html",
+    "main.7edbdc23.css.map": "/hex-guesser/static/css/main.7edbdc23.css.map",
+    "main.e6a68ac9.js.map": "/hex-guesser/static/js/main.e6a68ac9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7edbdc23.css",
+    "static/js/main.e6a68ac9.js"
+  ]
+}
