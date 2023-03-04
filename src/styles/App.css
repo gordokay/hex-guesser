@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+body {
+  font-family: "Space Mono", monospace;
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.container {
+  display: grid;
+  row-gap: 1rem;
+  grid-template-columns: 2fr 1fr;
+  align-items: baseline;
+}
+
+.container > section {
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  grid-column: span 2;
+}
+
+form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+form button {
+  align-self: flex-end;
+}
+
+button {
+  color: black;
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid black;
+  height: 3.5rem;
+  padding-inline: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+input {
+  border: 1px solid black;
+  height: 3.5rem;
+  width: 10ch;
+  font-size: 2rem;
+  font-weight: 700;
+  padding-left: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: lavender;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.info {
+  width: 70%;
+}
+
+.score {
+  position: relative;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+.score span {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 150ms ease-in-out;
+}
+
+.restart {
+  font-size: 0.875rem;
+  height: 2rem;
+  padding-inline: 1rem;
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+}
+
+.swatches {
+  display: flex;
+  gap: 2rem;
+}
+
+.swatch {
+  height: clamp(100px, 40vw, 250px);
+  aspect-ratio: 1;
+  border: 1px solid black;
+}
+
+.swatch-label {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.score span.hidden {
+  visibility: visible;
+  color: transparent;
+  transform: translateY(2rem);
+  transition: none;
+}
+
+.error {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+@media only screen and (max-width: 680px) {
+  body {
+    width: 80%;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container > header {
+    text-align: center;
+    order: 1;
+  }
+
+  .container > section {
+    align-self: start;
+    order: 0;
+  }
+
+  main {
+    order: 2;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  input {
+    font-size: 1.5rem;
+    height: 2.25rem;
+  }
+
+  button {
+    height: 2.25rem;
+  }
+
+  main {
+    align-self: start;
+  }
+
+  .swatch-label {
+    font-size: 1.25rem;
+  }
+
+  .score {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.125rem;
+  }
+}

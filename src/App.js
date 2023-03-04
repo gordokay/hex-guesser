@@ -8,6 +8,7 @@ import "./styles/App.css";
 
 function App() {
   const [score, setScore] = useState(0);
+  const [scoreDifference, setScoreDifference] = useState(0);
   const [randomHex, setRandomHex] = useState(hex.getRandomHexCode());
   const [playerHex, setPlayerHex] = useState("");
   const [error, setError] = useState("");
@@ -15,14 +16,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const input = e.target.children[1];
+    const input = e.target.children[0].children[1];
     if (input.validity.patternMismatch) {
       setError(
-        "That’s not a valid hex code. Use any digits or letters A through F."
+        "That’s not a valid hex code. Use any 6 digits or letters (A through F)."
       );
     } else if (input.validity.valueMissing) {
       setError("Enter a hex code.");
     } else {
+      setScoreDifference(
+        hex.getScore(hex.compareHexCodes(playerHex.toUpperCase(), randomHex))
+      );
       setScore(
         (lastScore) =>
           lastScore +
@@ -30,9 +34,10 @@ function App() {
       );
       setHasSubmitted(true);
       setTimeout(() => {
-        setRandomHex(hex.getRandomHexCode());
         setPlayerHex("");
+        setRandomHex(hex.getRandomHexCode());
         setHasSubmitted(false);
+        setScoreDifference(0);
       }, 2000);
     }
   };
@@ -42,8 +47,16 @@ function App() {
     setError("");
   };
 
+  const handleRestart = () => {
+    setScore(0);
+    setPlayerHex("");
+    setRandomHex(hex.getRandomHexCode());
+    setHasSubmitted(false);
+    setError("");
+  };
+
   return (
-    <>
+    <div className="container">
       <header>
         <h1>Hex Guesser</h1>
         <p className="info">
@@ -52,11 +65,25 @@ function App() {
       </header>
       <section>
         <h2>Score</h2>
-        <p className="score">{score}</p>
+        <p className="score">
+          {score}
+          <span className={scoreDifference === 0 ? "hidden" : ""}>
+            +{scoreDifference}
+          </span>
+        </p>
       </section>
+      <button
+        onClick={handleRestart}
+        disabled={hasSubmitted}
+        className="restart"
+      >
+        Restart
+      </button>
       <main>
-        <RandomSwatch hex={randomHex} hasSubmitted={hasSubmitted} />
-        <PlayerSwatch hex={playerHex} hasSubmitted={hasSubmitted} />
+        <div className="swatches">
+          <RandomSwatch hex={randomHex} hasSubmitted={hasSubmitted} />
+          <PlayerSwatch hex={playerHex} hasSubmitted={hasSubmitted} />
+        </div>
         <HexForm
           onHexChange={handleHexChange}
           onSubmit={handleSubmit}
@@ -65,7 +92,7 @@ function App() {
         />
         <ErrorMessage error={error} />
       </main>
-    </>
+    </div>
   );
 }
 
